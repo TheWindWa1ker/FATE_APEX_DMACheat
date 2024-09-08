@@ -11,13 +11,23 @@ jobs:
     runs-on: windows-latest
     
     steps:
-    - uses: actions/checkout@v2
+    - name: Cache vcpkg
+      uses: actions/cache@v2
+      with:
+        path: |
+          ${{ github.workspace }}/vcpkg
+          !${{ github.workspace }}/vcpkg/buildtrees
+          !${{ github.workspace }}/vcpkg/packages
+          !${{ github.workspace }}/vcpkg/downloads
+        key: ${{ runner.os }}-vcpkg-${{ hashFiles('**/vcpkg.json') }}
+        restore-keys: |
+          ${{ runner.os }}-vcpkg-
 
     - name: Setup vcpkg
       uses: lukka/run-vcpkg@v7
       with:
-        vcpkgGitCommitId: '501db0f17ef6df184fcdbfbe0f87cde2313b6ab1'  # 2023.04.15 的 commit hash
-        vcpkgArguments: 'curl:x64-windows'
+        vcpkgGitCommitId: 'c9fa965c2a1b1334469b4539386c7ce7ee4f5d7d'
+        vcpkgArguments: 'curl:x64-windows zlib:x64-windows'
         vcpkgTriplet: x64-windows
 
     - name: Configure CMake
