@@ -13,19 +13,16 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - name: Install vcpkg
+    - name: Setup vcpkg
       uses: lukka/run-vcpkg@v7
       with:
-        vcpkgGitCommitId: 'your-preferred-vcpkg-commit-id'
-
-    - name: Install dependencies
-      run: |
-        vcpkg install curl:x64-windows
-        # 添加其他需要的依赖
+        vcpkgGitCommitId: '2023.04.15'
+        vcpkgArguments: 'curl:x64-windows'
+        vcpkgTriplet: x64-windows
 
     - name: Configure CMake
       run: |
-        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release
+        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Build
       run: cmake --build ${{github.workspace}}/build --config Release
