@@ -1,44 +1,36 @@
-name: Build FATE
+name: Build FATE on Windows
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+on: [push, pull_request]
 
 jobs:
   build:
     runs-on: windows-latest
-    
-    steps:
-    - name: Cache vcpkg
-      uses: actions/cache@v2
-      with:
-        path: |
-          ${{ github.workspace }}/vcpkg
-          !${{ github.workspace }}/vcpkg/buildtrees
-          !${{ github.workspace }}/vcpkg/packages
-          !${{ github.workspace }}/vcpkg/downloads
-        key: ${{ runner.os }}-vcpkg-${{ hashFiles('**/vcpkg.json') }}
-        restore-keys: |
-          ${{ runner.os }}-vcpkg-
 
-    - name: Setup vcpkg
-      uses: lukka/run-vcpkg@v7
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install vcpkg
+      run: |
+        git clone https://github.com/microsoft/vcpkg.git ${{runner.workspace}}\vcpkg
+        ${{runner.workspace}}\vcpkg\bootstrap-vcpkg.bat
+        ${{runner.workspace}}\vcpkg\vcpkg integrate install
+        ${{runner.workspace}}\vcpkg\vcpkg install curl
+        echo "VCPKG_ROOT=${{runner.workspace}}\vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+    - name: Setup MSVC
+      uses: lukka/get-cmake@latest
       with:
-        vcpkgGitCommitId: 'c9fa965c2a1b1334469b4539386c7ce7ee4f5d7d'
-        vcpkgArguments: 'curl:x64-windows zlib:x64-windows'
-        vcpkgTriplet: x64-windows
+        cmake-version: '3.18'
 
     - name: Configure CMake
-      run: |
-        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE=${{github.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
+      run: cmake -B ${{runner.workspace}}\build -S . -DCMAKE_TOOLCHAIN_FILE=${{runner.workspace}}\vcpkg\scripts\buildsystems\vcpkg.cmake
 
     - name: Build
-      run: cmake --build ${{github.workspace}}/build --config Release
+      run: cmake --build ${{runner.workspace}}\build --config Release
 
-    - name: Upload artifacts
+    - name: Upload Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: FATE-windows
-        path: ${{github.workspace}}/outputs/x64/FATE.exe
+        name: FATE-executable
+        path: ${{runner.workspace}}\build\outputs
