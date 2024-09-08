@@ -1,11 +1,12 @@
  ███████████   █████████   ███████████ ██████████
-░░███░░░░░░█  ███░░░░░███ ░█░░░███░░░█░░███░░░░░█
+░░███░░░░░░█  ███░░░░░███ ░█░░░███░░░█░░███░░░░░█|
  ░███   █ ░  ░███    ░███ ░   ░███  ░  ░███  █ ░
  ░███████    ░███████████     ░███     ░██████
  ░███░░░█    ░███░░░░░███     ░███     ░███░░█
  ░███  ░     ░███    ░███     ░███     ░███ ░   █ ░█▀█░█▀█░█▀▀░█░█
  █████       █████   █████    █████    ██████████ ░█▀█░█▀▀░█▀▀░▄▀▄
 ░░░░░       ░░░░░   ░░░░░    ░░░░░    ░░░░░░░░░░  ░▀░▀░▀░░░▀▀▀░▀░▀
+
 Alright, after some consideration, I have decided to make my source code public. I hope that my project can attract some fresh blood, and I don't want it to be sold, but rather kept open source and updated.
 
 My project initially started as a modification of Eehh's project, and I think I messed up quite a bit, writing a lot of poor-quality code.
