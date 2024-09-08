@@ -9,6 +9,8 @@
    ░░░░░      ░░░░░   ░░░░░   ░░░░░░    ░░░░░░░░░░  ░▀░▀░▀░░░▀▀▀░▀░▀
    </code></pre>
 
+# ❤ If you like my project, please give it a star.
+# ⭐ It will be an encouragement to me.
 
 # 🌟 Project Public Declaration 🌟
 
