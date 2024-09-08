@@ -1,4 +1,4 @@
-name: Build FATE
+name: Build FATE on Windows
 
 on: [push, pull_request]
 
@@ -7,17 +7,29 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: Setup vcpkg
+    - name: Install vcpkg
       run: |
         git clone https://github.com/microsoft/vcpkg.git ${{runner.workspace}}/vcpkg
         ./vcpkg/bootstrap-vcpkg.bat
         ./vcpkg/vcpkg integrate install
         echo "VCPKG_ROOT=${{runner.workspace}}/vcpkg" >> $GITHUB_ENV
 
+    - name: Setup MSVC
+      uses: lukka/get-cmake@latest
+      with:
+        cmake-version: '3.18'
+
     - name: Configure CMake
       run: cmake -B ${{runner.workspace}}/build -S . -DCMAKE_TOOLCHAIN_FILE=${{runner.workspace}}/vcpkg/scripts/buildsystems/vcpkg.cmake
 
     - name: Build
       run: cmake --build ${{runner.workspace}}/build --config Release
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: FATE-executable
+        path: ${{runner.workspace}}/build/outputs/
