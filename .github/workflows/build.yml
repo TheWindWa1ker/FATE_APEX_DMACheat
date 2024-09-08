@@ -1,35 +1,37 @@
-name: Build FATE on Windows
+name: Build FATE
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: windows-latest
-
+    
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+    - uses: actions/checkout@v2
 
     - name: Install vcpkg
-      run: |
-        git clone https://github.com/microsoft/vcpkg.git ${{runner.workspace}}\vcpkg
-        ${{runner.workspace}}\vcpkg\bootstrap-vcpkg.bat
-        ${{runner.workspace}}\vcpkg\vcpkg integrate install
-        echo "VCPKG_ROOT=${{runner.workspace}}\vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-
-    - name: Setup MSVC
-      uses: lukka/get-cmake@latest
+      uses: lukka/run-vcpkg@v7
       with:
-        cmake-version: '3.18'
+        vcpkgGitCommitId: 'your-preferred-vcpkg-commit-id'
+
+    - name: Install dependencies
+      run: |
+        vcpkg install curl:x64-windows
+        # 添加其他需要的依赖
 
     - name: Configure CMake
-      run: cmake -B ${{runner.workspace}}\build -S . -DCMAKE_TOOLCHAIN_FILE=${{runner.workspace}}\vcpkg\scripts\buildsystems\vcpkg.cmake
+      run: |
+        cmake -B ${{github.workspace}}/build -DCMAKE_BUILD_TYPE=Release
 
     - name: Build
-      run: cmake --build ${{runner.workspace}}\build --config Release
+      run: cmake --build ${{github.workspace}}/build --config Release
 
-    - name: Upload Artifact
+    - name: Upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: FATE-executable
-        path: ${{runner.workspace}}\build\outputs
+        name: FATE-windows
+        path: ${{github.workspace}}/outputs/x64/FATE.exe
