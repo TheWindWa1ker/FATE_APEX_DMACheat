@@ -1,12 +1,12 @@
    <pre><code>
    ███████████   █████████   ███████████ ██████████
-   ░░███░░░░░░█  ███░░░░░███ ░█░░░███░░░█░░███░░░░░█
+   ░███░░░░░░█  ███░░░░░███ ░█░░░███░░░█░░███░░░░░█
    ░███   █ ░  ░███    ░███ ░   ░███  ░  ░███  █ ░
    ░███████    ░███████████     ░███     ░██████
    ░███░░░█    ░███░░░░░███     ░███     ░███░░█
    ░███  ░     ░███    ░███     ░███     ░███ ░   █ ░█▀█░█▀█░█▀▀░█░█
    █████       █████   █████    █████    ██████████ ░█▀█░█▀▀░█▀▀░▄▀▄
-   ░░░░░       ░░░░░   ░░░░░    ░░░░░    ░░░░░░░░░  ░▀░▀░▀░░░▀▀░▀░▀
+   ░░░░░      ░░░░░   ░░░░░   ░░░░░░    ░░░░░░░░░░  ░▀░▀░▀░░░▀▀▀░▀░▀
    </code></pre>
 
 
@@ -42,7 +42,7 @@ After much consideration, I have decided to make my source code public. I hope t
 ### **Aimbot**
 
 - **Aimbot Smooth**: Smooth aimbot.
-- **FlickBot**: aimbot and trigger.
+- **FlickBot**: Aimbot and trigger.
 - **Flick Smooth**
 - **TriggerBot**: Triggerbot with prediction.
 - **Aimbot with KmBox or Memory Writing**
@@ -54,8 +54,13 @@ After much consideration, I have decided to make my source code public. I hope t
 - **TS And RubbitJump**: Some unresolved issues.
 - **Auto Grapple**: [Incomplete]
 - **Fusion Mode**
-- **Take TwoGun Bug**: Using KmBox to do it,can take tow gun,if someone spec you that maybe cause to ban,use at your own risk.
 - **Show Spector**: Display spectator.
+
+### **Exploit**
+
+- **Take TwoGun Bug**: Exploiting the Two-Gun Bug. By using KmBox to implement this, you can wield two guns simultaneously.
+- **Be aware that if someone spectates you while you are using this, there is a risk of getting banned.**
+- **Therefore, use it at your own risk.**
 
 ### **Config System**
 
@@ -64,8 +69,6 @@ After much consideration, I have decided to make my source code public. I hope t
 ## Development Environment
 
 - **IDE**: Clion
-- **Build System**: Includes a CMakeLists.txt file, which you will need to manually modify to use properly.
+- **Build System**: Includes a <span style="color:#0000ff;">CMakeLists.txt</span> file, which you will need to manually modify to use properly.
 
 ---
-
-This Markdown-formatted README provides a clear and visually appealing presentation of your project's information. You can copy and paste this directly into your GitHub repository's README.md file.
