@@ -6,8 +6,6 @@
 #include "game/Aimbot.hpp"
 #include "game/Glow.hpp"
 
-#include "Auth.hpp"
-
 #define GREEN ImColor(0, 255, 0)
 #define RED ImColor(255, 75, 0)
 #define BLUE ImColor(51, 153, 255)
