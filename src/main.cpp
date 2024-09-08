@@ -736,8 +736,6 @@ int main(int argc, char* argv[])
     // 重置颜色为默认值
     SetConsoleTextAttribute(hConsole, 7);
 
-    FATEName = std::filesystem::path(argv[0]).filename().string();
-
     VMMDLL_ConfigSet(mem.vHandle, VMMDLL_OPT_REFRESH_ALL, 1);
 
 	if (!mem.Init("r5apex.exe", true, false))
