@@ -738,19 +738,11 @@ int main(int argc, char* argv[])
 
     FATEName = std::filesystem::path(argv[0]).filename().string();
 
-    GetBulletin();
-
-    while (!LoginSuccess && !IsLatestVersion)
-    {
-        AuthRender();
-    }
-    //std::thread renderThread(Render, Myself, Players, GameCamera, Spectators, AimAssist, ESP);
-
     VMMDLL_ConfigSet(mem.vHandle, VMMDLL_OPT_REFRESH_ALL, 1);
 
 	if (!mem.Init("r5apex.exe", true, false))
 	{
-		std::cout << "[!] DMA初始化失败" << std::endl;
+	std::cout << "[!] DMA初始化失败" << std::endl;
         std::cout << "[!] 请检查是否进入游戏和DMA板子是否连接正常" << std::endl;
         std::cout << "[#] 按回车继续...";
         std::cin.get();
