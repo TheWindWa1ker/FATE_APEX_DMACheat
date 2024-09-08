@@ -52,7 +52,6 @@ FILE(GLOB_RECURSE FILE_INCLUDES # 遍历子目录下所有符合情况的头文�
 
 include_directories( # 设置全局头文件目录 使其他源码文件可在任意目录<头文件.h>
         ${CMAKE_CURRENT_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}/auth
         ${CMAKE_CURRENT_SOURCE_DIR}/include/nlohmann
         ${CMAKE_CURRENT_SOURCE_DIR}/include/game
         ${CMAKE_CURRENT_SOURCE_DIR}/include/imgui
@@ -89,7 +88,6 @@ add_executable(FATE
         ${CMAKE_CURRENT_SOURCE_DIR}/include/tools/skynade.h
         include/game/Drawmisc.hpp
         include/game/ReadList.hpp
-        auth/Auth.hpp
         # 源文件
 )
 
