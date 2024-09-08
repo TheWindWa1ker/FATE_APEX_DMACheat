@@ -13,9 +13,9 @@ jobs:
     - name: Install vcpkg
       run: |
         git clone https://github.com/microsoft/vcpkg.git ${{runner.workspace}}/vcpkg
-        ./vcpkg/bootstrap-vcpkg.bat
-        ./vcpkg/vcpkg integrate install
-        echo "VCPKG_ROOT=${{runner.workspace}}/vcpkg" >> $GITHUB_ENV
+        .\vcpkg\bootstrap-vcpkg.bat
+        .\vcpkg\vcpkg integrate install
+        echo "VCPKG_ROOT=${{runner.workspace}}\vcpkg" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
     - name: Setup MSVC
       uses: lukka/get-cmake@latest
